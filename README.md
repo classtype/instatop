@@ -5,7 +5,8 @@ yesqzgf5ej
 
 
 // Git push
-git add . && git commit --amend -m "ss" && git push -f
+git add . && git commit --amend -m "update" && git push -f
+git add . && git commit -m "update" && git push
 
 
 
@@ -59,5 +60,3 @@ CREATE DATABASE Test; SHOW DATABASES; EXIT;
 mysql && 
 DROP DATABASE Test; SHOW DATABASES; EXIT;
 
-
-123
