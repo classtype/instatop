@@ -4,10 +4,7 @@
 var path = require('path');
 
 console.log('---------------');
-console.log(path.resolve('.'));
-console.log(path.resolve(__dirname));
-console.log(path.resolve(__dirname, '..'));
-console.log(path.resolve(__dirname, '..', '..'));
+console.log(path.resolve(__dirname, '..', '..', 'src', 'deploy'));
 console.log('---------------');
 //require('./../../deploy.js').start();
 //require('/home/ubuntu/workspace/deploy.js').start();
