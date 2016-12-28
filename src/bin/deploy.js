@@ -24,9 +24,9 @@ var exec = function(args, callback) {
     ch.stderr.on('data', function(data) {
         streem(data, 'red');
     });
-    ch.on('close', function(code) {
+    ch.on('exit', function(code) {
         callback(null, command);
-        console.log('close = '+ command);
+        console.log('exit = '+ command);
     });
 };
 
