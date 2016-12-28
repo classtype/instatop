@@ -28,9 +28,6 @@ var exec = function(args, callback) {
         callback(null, command);
         console.log('close = '+ command + args);
     });
-    ch.on('exit', function (code) {
-        console.log('exit = '+ command + args);
-    });
 };
 
 //--------------------------------------------------------------------------------------------------
