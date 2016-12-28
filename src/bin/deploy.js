@@ -19,7 +19,7 @@ var exec = function(args, callback) {
         line += (i != 0 ? ' ' : '') + args[i];
     }
     
-    console.log(colors.bgYellow('Старт: "'+ line +'"'));
+    console.log(colors.bgBlack('Старт: "'+ line +'"'));
     
     var command = args.shift();
     var ch = spawn(command, args);
