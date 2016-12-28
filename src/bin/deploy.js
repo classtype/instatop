@@ -25,8 +25,8 @@ var exec = function(args, callback) {
         streem(data, 'red');
     });
     ch.on('close', function(code) {
-        callback(null);
         console.log('close = '+ command);
+        callback(null);
     });
 };
 
