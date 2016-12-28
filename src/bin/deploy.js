@@ -49,6 +49,7 @@ var commands = [
     ['clear'],
     ['git', 'add', '.'],
     ['git', 'commit', '-m', '"update"'],
+    ['ls', '-la'],
     ['git', 'push']
 ];
 async.filter(commands, exec, function(err, r) {
