@@ -30,6 +30,7 @@ var exec = function(args, callback) {
 //--------------------------------------------------------------------------------------------------
 
 var commands = [
+    ['clear'],
     ['git', 'add', '.'],
     ['git', 'commit', '-m', '"update"'],
     ['git', 'push']
