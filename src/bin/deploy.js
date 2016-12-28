@@ -22,7 +22,7 @@ var exec = function(args, callback) {
     ch.stderr.on('data', function(data) {
         streem(data, 'red');
     });
-    ch.on('exit', function(code) {
+    ch.on('close', function(code) {
         callback(null);
         console.log('exit = '+ args);
     });
