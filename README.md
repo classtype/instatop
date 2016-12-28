@@ -11,13 +11,13 @@ git add . && git commit -m "update" && git push
 
 
 // Reinstall Project
-rm -rf /var/projects/test && 
-mkdir -p /var/projects/test && 
-cd /var/projects/test && 
-git clone https://github.com/classtype/test.git /var/projects/test && 
-npm i && 
+rm -rf /var/projects/instatop && 
+mkdir -p /var/projects/instatop && 
+cd /var/projects/instatop && 
+git clone https://github.com/classtype/instatop.git /var/projects/instatop && 
+npm i --unsafe-perm && 
 forever stopall && 
-forever start /var/projects/test/index.js && 
+forever start /var/projects/instatop/index.js && 
 
 
 
@@ -59,4 +59,3 @@ CREATE DATABASE Test; SHOW DATABASES; EXIT;
 // Reinstall MySQL
 mysql && 
 DROP DATABASE Test; SHOW DATABASES; EXIT;
-

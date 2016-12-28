@@ -3,5 +3,8 @@
     "config": {"unsafe-perm": true},
     "scripts": {
         "prepublish": "npm i ./bin --unsafe-perm"
+    },
+    "dependencies": {
+        "colors": "1.0.3"
     }
 }
