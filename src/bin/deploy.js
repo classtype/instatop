@@ -29,7 +29,7 @@ var exec = function(args, callback) {
     
     
     ch.on('exit', function (code) {
-        console.log('exit = '+ command);
+        console.log('exit = '+ command + args);
     });
 };
 
