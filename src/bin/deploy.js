@@ -1,30 +1,14 @@
+/*
 var colors = require('colors/safe');
-var spawn = require('child_process').spawn;
+process.stdout.write(colors.red(data.toString()));
+*/
 
-
-
-
-
-var child = spawn('git', ['push']);
-
-var callback = function(data) {
-    process.stdout.write(data.toString());
-};
-
-child.stdout.on('data', function(data) {
-    process.stdout.write(colors.green(data.toString()));
-});
-
-child.stderr.on('data', function(data) {
-    process.stdout.write(colors.red(data.toString()));
-});
-
-child.stdin.on('data', callback);
-
-child.on('close', function(code) {
-    console.log('close');
-});
-
-child.on('data', function(code) {
-    console.log('Code = '+ code);
+const exec = require('child_process').exec;
+exec('git add . && git commit -m "update" && git push', (error, stdout, stderr) => {
+  if (error) {
+    console.error(`exec error: ${error}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+  console.log(`stderr: ${stderr}`);
 });
