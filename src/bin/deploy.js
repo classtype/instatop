@@ -15,8 +15,9 @@ var streem = function(message, color) {
 var exec = function(args, callback) {
     var command = args.shift();
     var ch = spawn(command, args);
+    
     streem(command, 'red');
-    console.log(111111111111);
+    
     ch.stdout.on('data', function (data) {
         streem(data, 'green');
     });
@@ -27,8 +28,6 @@ var exec = function(args, callback) {
         callback(null, command);
         console.log('close = '+ command + args);
     });
-    
-    
     ch.on('exit', function (code) {
         console.log('exit = '+ command + args);
     });
@@ -37,15 +36,13 @@ var exec = function(args, callback) {
 //--------------------------------------------------------------------------------------------------
 
 var commands = [
-    ['clear'],
     ['git', 'add', '.'],
     ['git', 'commit', '-m', '"update"'],
     ['git', 'push']
 ];
-
-async.map(commands, exec, function(err, r) {
-    //console.log('Results:');
-    //console.log(r);
+async.map([['clear']], exec, function(err, r) {
+    async.map(commands, exec, function(err, r) {
+    });
 });
 
 /*
