@@ -18,18 +18,33 @@ var exec = function(args, callback) {
     
     console.log(123);
     
-    ch.stdout.on('data', function (data) {
+    ch.stdout.on('data', function(data) {
         streem(data, 'green');
     });
-    ch.stderr.on('data', function (data) {
+    ch.stderr.on('data', function(data) {
         streem(data, 'red');
     });
-    ch.on('close', function (code) {
+    ch.on('close', function(code) {
         callback(null, command);
         console.log('close = '+ command + args);
     });
 };
 
+//--------------------------------------------------------------------------------------------------
+/*
+async.waterfall([
+    function(callback) {
+        callback(null, 'один', 'два');
+    },
+    function(arg1, arg2, callback){
+        callback(null, 'три');
+    },
+    function(arg1, callback){
+        callback(null, 'Готово');
+    }
+], function (err, result) {
+});
+*/
 //--------------------------------------------------------------------------------------------------
 
 var commands = [
@@ -37,7 +52,7 @@ var commands = [
     ['git', 'commit', '-m', '"update"'],
     ['git', 'push']
 ];
-async.map(commands, exec, function(err, r) {
+async.filter(commands, exec, function(err, r) {
     console.log('r:');
     console.log(r);
 });
