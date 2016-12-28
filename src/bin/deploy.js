@@ -4,16 +4,21 @@ var spawn = require('child_process').spawn;
 var colors = require('colors/safe');
 var async = require('async');
 
+var streem = function(message, color) {
+    process.stdout.write(colors[color](message.toString()));
+};
+
 //--------------------------------------------------------------------------------------------------
 
 var exec = function(args, callback) {
     var command = args.shift();
     var ch = spawn(command, args);
+    streem(command, 'green');
     ch.stdout.on('data', function (data) {
-        process.stdout.write(colors.green(data.toString()));
+        streem(data, 'green');
     });
     ch.stderr.on('data', function (data) {
-        process.stdout.write(colors.red(data.toString()));
+        streem(data, 'red');
     });
     ch.on('close', function (code) {
         callback(null, command);
