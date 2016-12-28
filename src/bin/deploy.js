@@ -13,10 +13,16 @@ var streem = function(message, color) {
 //--------------------------------------------------------------------------------------------------
 
 var exec = function(args, callback) {
+    var start = '';
+    
+    for (var i = 0; i < args.length; i++) {
+        start += ' '+ args[i];
+    }
+    
+    console.log(start);
+    
     var command = args.shift();
     var ch = spawn(command, args);
-    
-    console.log('start = ' + command);
     
     ch.stdout.on('data', function(data) {
         streem(data, 'green');
