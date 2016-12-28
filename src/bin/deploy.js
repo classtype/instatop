@@ -19,7 +19,7 @@ var exec = function(args, callback) {
         start += ' '+ args[i];
     }
     
-    console.log(start);
+    console.log(start.substr(1));
     
     var command = args.shift();
     var ch = spawn(command, args);
