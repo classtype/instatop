@@ -44,7 +44,6 @@ var arr = [];
     for (var i = 0; i < commands.length; i++) {
         arr[i] = (function(com) {
             return function(callback) {
-                console.log(com);
                 exec(com, callback);
             };
         })(commands[i]);
