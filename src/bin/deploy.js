@@ -8,11 +8,14 @@ var async = require('async');
 
 var exec = function(args, callback) {
     var command = args.shift();
-    var child = spawn(command, args);
-    child.stderr.on('data', function (data) {
+    var ch = spawn(command, args);
+    ch.stdout.on('data', function (data) {
+        process.stdout.write(colors.green(data.toString()));
+    });
+    ch.stderr.on('data', function (data) {
         process.stdout.write(colors.red(data.toString()));
     });
-    child.on('close', function (code) {
+    ch.on('close', function (code) {
         callback(null, command);
     });
 };
