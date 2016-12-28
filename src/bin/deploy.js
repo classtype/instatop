@@ -16,6 +16,8 @@ var exec = function(args, callback) {
     var command = args.shift();
     var ch = spawn(command, args);
     
+    console.log('start = ' + command);
+    
     ch.stdout.on('data', function(data) {
         streem(data, 'green');
     });
