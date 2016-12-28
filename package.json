@@ -1,6 +1,7 @@
 {
     "private": true,
+    "unsafe-perm": true,
     "scripts": {
-    "prepublish": "npm i ./bin"
+        "prepublish": "npm i ./bin"
     }
 }
