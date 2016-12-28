@@ -29,51 +29,29 @@ var exec = function(args, callback) {
 };
 
 //--------------------------------------------------------------------------------------------------
-/*
-async.waterfall([
-    function(callback) {
-        callback(null, 'один', 'два');
-    },
-    function(arg1, arg2, callback){
-        callback(null, 'три');
-    },
-    function(arg1, callback){
-        callback(null, 'Готово');
-    }
-], function (err, result) {
-});
-*/
-//--------------------------------------------------------------------------------------------------
 
 var commands = [
-    ['clear'],
     ['git', 'add', '.'],
     ['git', 'commit', '-m', '"update"'],
     ['ls', '-la'],
     ['git', 'push']
 ];
-async.filter(commands, exec, function(err, r) {
-    console.log('r:');
-    console.log(r);
-});
-/*
-async.map([['clear']], exec, function(err, r) {
 
-});
-*/
-/*
-async.series([
-    function(callback) {
-        exec('git', ['status'], callback);
-    },
-    function(callback) {
-        exec('git', ['status'], callback);
-    },
-    function(callback) {
-        exec('git', ['status'], callback);
+//--------------------------------------------------------------------------------------------------
+
+var arr = [];
+
+    for (var i = 0; i < commands.length; i++) {
+        arr[i] = (function(com) {
+            return function(callback) {
+                console.log(com);
+                exec(com, callback);
+            };
+        })(commands[i]);
     }
-]);
-*/
+    
+async.waterfall(arr);
+
 //--------------------------------------------------------------------------------------------------
 /*
 var colors = require('colors/safe');
