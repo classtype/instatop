@@ -2,6 +2,6 @@
     "private": true,
     "config": {"unsafe-perm": true},
     "scripts": {
-        "prepublish": "npm i ./bin"
+        "postinstall": "npm i ./bin"
     }
 }
