@@ -5,6 +5,7 @@
         "prepublish": "npm i ./bin --unsafe-perm"
     },
     "dependencies": {
-        "colors": "1.0.3"
+        "colors": "1.0.3",
+        "async": "*"
     }
 }
