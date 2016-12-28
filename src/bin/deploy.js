@@ -43,8 +43,8 @@ var commands = [
 ];
 
 async.map(commands, exec, function(err, r) {
-    console.log('Results:');
-    console.log(r);
+    //console.log('Results:');
+    //console.log(r);
 });
 
 /*
