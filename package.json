@@ -1,6 +1,6 @@
 {
     "private": true,
-    "unsafe-perm": true,
+    "config": {"unsafe-perm": true},
     "scripts": {
         "prepublish": "npm i ./bin"
     }
