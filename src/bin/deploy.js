@@ -4,6 +4,8 @@ var spawn = require('child_process').spawn;
 var colors = require('colors/safe');
 var async = require('async');
 
+//--------------------------------------------------------------------------------------------------
+
 var streem = function(message, color) {
     process.stdout.write(colors[color](message.toString()));
 };
@@ -27,10 +29,13 @@ var exec = function(args, callback) {
 
 //--------------------------------------------------------------------------------------------------
 
-async.map([
+var commands = [
     ['git', 'add', '.'],
     ['git', 'commit', '-m', '"update"'],
-    ['git', 'push']], exec, function(err, r) {
+    ['git', 'push']
+];
+
+async.map(commands, exec, function(err, r) {
     console.log('Results:');
     console.log(r);
 });
