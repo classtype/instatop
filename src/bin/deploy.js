@@ -25,7 +25,7 @@ var exec = function(args, callback) {
         streem(data, 'red');
     });
     ch.on('close', function (code) {
-        callback(null, command);
+        //callback(null, command);
         console.log('close = '+ command + args);
     });
 };
@@ -37,11 +37,13 @@ var commands = [
     ['git', 'commit', '-m', '"update"'],
     ['git', 'push']
 ];
-async.map([['clear']], exec, function(err, r) {
-    async.map(commands, exec, function(err, r) {
-    });
+async.map(commands, exec, function(err, r) {
 });
+/*
+async.map([['clear']], exec, function(err, r) {
 
+});
+*/
 /*
 async.series([
     function(callback) {
