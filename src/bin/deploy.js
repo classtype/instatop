@@ -31,7 +31,6 @@ var exec = function(args, callback) {
         streem(data, 'red');
     });
     ch.on('close', function(code) {
-        console.log('Конец: "'+ line +'"');
         callback(null);
     });
 };
