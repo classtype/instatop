@@ -13,13 +13,13 @@ var streem = function(message, color) {
 //--------------------------------------------------------------------------------------------------
 
 var exec = function(args, callback) {
-    var start = '';
+    var line = '';
     
     for (var i = 0; i < args.length; i++) {
-        start += ' '+ args[i];
+        line += (i != 0 ? ' ' : '') + args[i];
     }
     
-    console.log(start.substr(1));
+    console.log('Старт: "'+ line +'"');
     
     var command = args.shift();
     var ch = spawn(command, args);
@@ -31,7 +31,7 @@ var exec = function(args, callback) {
         streem(data, 'red');
     });
     ch.on('close', function(code) {
-        console.log('close = '+ command);
+        console.log('Конец: "'+ line +'"');
         callback(null);
     });
 };
