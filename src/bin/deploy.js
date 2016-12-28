@@ -1,6 +1,7 @@
 //--------------------------------------------------------------------------------------------------
 
 var spawn = require('child_process').spawn;
+var colors = require('colors/safe');
 var async = require('async');
 
 //--------------------------------------------------------------------------------------------------
@@ -8,6 +9,9 @@ var async = require('async');
 var exec = function(args, callback) {
     var command = args.shift();
     var child = spawn(command, args);
+    child.stderr.on('data', function (data) {
+        process.stdout.write(colors.green(data.toString()));
+    });
     child.on('close', function (code) {
         callback(null, command);
     });
