@@ -5,7 +5,7 @@ var spawn = require('child_process').spawn;
 
 
 
-var child = spawn('git', ['add', '.']);
+var child = spawn('git', ['push']);
 
 var callback = function(data) {
     process.stdout.write(data.toString());
