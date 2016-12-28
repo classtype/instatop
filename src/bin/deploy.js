@@ -24,7 +24,7 @@ var exec = function(args, callback) {
     });
     ch.on('close', function(code) {
         callback(null);
-        console.log('exit = '+ args);
+        console.log('close = '+ args);
     });
 };
 
