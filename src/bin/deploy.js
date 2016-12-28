@@ -38,6 +38,7 @@ var commands = [
     ['git', 'push']
 ];
 async.map(commands, exec, function(err, r) {
+    console.log('r:');
     console.log(r);
 });
 /*
