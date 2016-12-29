@@ -32,6 +32,7 @@ var exec = function(args, callback) {
     });
     ch.on('error', function(error) {
         console.log(colors.bgRed('Ошибка: "'+ error +'"'));
+        process.exit();
     });
     ch.on('close', function(code) {
         callback(null);
