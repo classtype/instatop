@@ -10,6 +10,7 @@ var exec = require('./exec');
 
 exec([
     ['clear'],
+    ['ddddd'],
     ['git', 'add', '.'],
     ['git', 'commit', '-m', '"update"'],
     ['git', 'push']
