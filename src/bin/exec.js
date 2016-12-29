@@ -1,3 +1,5 @@
+//--------------------------------------------------------------------------------------------------
+
 var spawn = require('child_process').spawn;
 var colors = require('colors/safe');
 var async = require('async');
@@ -33,6 +35,8 @@ var exec = function(args, callback) {
     });
 };
 
+//--------------------------------------------------------------------------------------------------
+
 module.exports = function(commands) {
     var array = [];
 
@@ -46,3 +50,5 @@ module.exports = function(commands) {
     
     async.waterfall(array);
 };
+
+//--------------------------------------------------------------------------------------------------
