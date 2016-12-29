@@ -41,9 +41,9 @@ module.exports = function(commands) {
     var array = [];
 
     for (var i = 0; i < commands.length; i++) {
-        array[i] = (function(com) {
+        array[i] = (function(command) {
             return function(callback) {
-                exec(com, callback);
+                exec(command, callback);
             };
         })(commands[i]);
     }
