@@ -41,7 +41,6 @@ var commands = [
     ['clear'],
     ['git', 'add', '.'],
     ['git', 'commit', '-m', '"update"'],
-    ['ls', '-la'],
     ['git', 'push']
 ];
 
