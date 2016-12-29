@@ -41,7 +41,7 @@ var exec = function(args, callback) {
 
 //--------------------------------------------------------------------------------------------------
 
-module.exports = function(commands) {
+module.exports = function(commands, callback) {
     var array = [];
 
     for (var i = 0; i < commands.length; i++) {
@@ -52,7 +52,7 @@ module.exports = function(commands) {
         })(commands[i]);
     }
     
-    async.waterfall(array);
+    async.waterfall(array, callback);
 };
 
 //--------------------------------------------------------------------------------------------------
