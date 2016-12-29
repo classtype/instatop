@@ -30,8 +30,8 @@ var exec = function(args, callback) {
     ch.stderr.on('data', function(data) {
         streem(data, 'red');
     });
-    ch.on('error', function(data) {
-        streem(data, 'bgRed');
+    ch.on('error', function(error) {
+        console.log(colors.bgRed('Ошибка: "'+ error +'"'));
     });
     ch.on('close', function(code) {
         callback(null);
