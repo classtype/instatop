@@ -1,5 +1,6 @@
 {
     "name": "bin", "version": "0.0.0", "bin": {
-        "deploy": "./deploy"
+        "deploy": "./deploy",
+        "server": "./server"
     }
 }
