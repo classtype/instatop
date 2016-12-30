@@ -5,7 +5,8 @@ var http = require('http');
 var connection = mysql.createConnection({
     host: config.host,
     user: 'root',
-    password: ''
+    password: '',
+    database: 'Test'
 });
 
 var sql = 'Mysql none.';
