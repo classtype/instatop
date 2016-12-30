@@ -10,7 +10,7 @@ var ssh = require('./ssh');
     if (process.argv[2] == 'restart') {
         var restart = function() {
         // Init
-            var ch = spawn('ping', ['algame.ru1', '-c', '1']);
+            var ch = spawn('ping', ['95.213.229.167', '-c', '1']);
             
         // Error
             ch.on('error', function(error) {
@@ -45,8 +45,12 @@ var ssh = require('./ssh');
                 username: 'root',
                 password: 'yesqzgf5ej'
             },[
-                'shutdown -r now'
-            ], restart);
+                "echo '#!/bin/sh -e' > /etc/rc.local",
+                "echo 'forever start /var/projects/test/index.js' >> /etc/rc.local",
+                "echo 'exit 0' >> /etc/rc.local"
+            ], function() {
+                setTimeout(restart, 1000);
+            });
         });
     }
 
