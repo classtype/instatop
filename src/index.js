@@ -19,10 +19,11 @@ connection.connect(function(err) {
     
     sql = 'connected as id '+ connection.threadId;
 });
-
+var count = 0;
 http.createServer(function (req, res) {
+    count++;
     res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('2Всем привет!\n' + '<br>sql: '+ sql);
+    res.end(count +' = Всем привет!\n' + '<br>sql: '+ sql);
 }).listen(process.env.PORT||80, process.env.IP||null);
 
 console.log('Server running at.');
