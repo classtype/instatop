@@ -47,7 +47,8 @@ var ssh = require('./ssh');
             },[
                 "echo '#!/bin/sh -e' > /etc/rc.local",
                 "echo 'forever start /var/projects/test/index.js' >> /etc/rc.local",
-                "echo 'exit 0' >> /etc/rc.local"
+                "echo 'exit 0' >> /etc/rc.local",
+                'shutdown -r now'
             ], function() {
                 setTimeout(restart, 1000);
             });
