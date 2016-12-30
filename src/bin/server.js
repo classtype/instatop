@@ -1,5 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 
+var config = require('./config');
 var colors = require('colors/safe');
 var exec = require('./exec');
 var ssh = require('./ssh');
@@ -8,12 +9,16 @@ var request = require('request');
 //--------------------------------------------------------------------------------------------------
 
     if (process.argv[2] == 'restart') {
+        var restartOn = false;
         var restart = function() {
-            request('http://95.213.229.167/', function (error, response, body) {
+            request(config.url, function (error, response, body) {
                 if (!error) {
-                    console.log(colors.green('Сервер доступен!'));
-                    process.exit();
+                    console.log(colors.bgGreen('Сервер работает!'));
+                    if (restartOn) {
+                        process.exit();
+                    }
                 }
+                restartOn = true;
                 console.log(colors.red('Сервер не доступен.'));
                 setTimeout(restart, 1000);
             })
@@ -22,18 +27,25 @@ var request = require('request');
     // Очищаем консоль
         exec([['clear']], function() {
         // Заходим на сервер
-            ssh({
-                host: '95.213.229.167',
-                port: 22,
-                username: 'root',
-                password: 'yesqzgf5ej'
-            },[
+            ssh(config.ssh, ['shutdown -r now'], function() {
+                console.log(colors.red('Выключение...'));
+                setTimeout(restart, 10000);
+            });
+        });
+    }
+    
+//--------------------------------------------------------------------------------------------------
+
+    if (process.argv[2] == 'install') {
+    // Очищаем консоль
+        exec([['clear']], function() {
+        // Заходим на сервер
+            ssh(config.ssh, [
                 "echo '#!/bin/sh -e' > /etc/rc.local",
                 "echo 'forever start /var/projects/instatop/src/index.js' >> /etc/rc.local",
-                "echo 'exit 0' >> /etc/rc.local",
-                'shutdown -r now'
+                "echo 'exit 0' >> /etc/rc.local"
             ], function() {
-                setTimeout(restart, 1000);
+                console.log(colors.bgGreen('Установка завершена!'));
             });
         });
     }

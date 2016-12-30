@@ -1,5 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 
+var config = require('./config');
 var exec = require('./exec');
 var ssh = require('./ssh');
 
@@ -13,12 +14,7 @@ exec([
     ['git', 'push']
 ], function() {
 // Заходим на сервер
-    ssh({
-        host: '95.213.229.167',
-        port: 22,
-        username: 'root',
-        password: 'yesqzgf5ej'
-    },[
+    ssh(config.ssh, [
         'rm -rf /var/projects/instatop',
         'mkdir -p /var/projects/instatop',
         'git clone https://github.com/classtype/instatop.git /var/projects/instatop',

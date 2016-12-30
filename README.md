@@ -1,6 +1,6 @@
 // Вход
 ssh -o StrictHostKeyChecking=no root@95.213.229.167
-yesqzgf5ej
+<пароль>
 
 
 

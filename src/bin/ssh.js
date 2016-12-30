@@ -43,7 +43,6 @@ var exec = function(ssh, command, callback) {
 //--------------------------------------------------------------------------------------------------
 
 module.exports = function(cfg, commands, callback) {
-    callback = callback || function() {};
     var ssh = new ssh2();
     
     console.log(colors.bgGreen('Вход на сервер...'));
@@ -69,9 +68,12 @@ module.exports = function(cfg, commands, callback) {
     });
     
     ssh.disconnect = function() {
-        console.log(colors.bgMagenta('Соединение прервано!'));
         ssh.end();
-        callback();
+        if (callback) {
+            callback();
+        } else {
+            console.log(colors.bgMagenta('Соединение прервано!'));
+        }
     };
     
     ssh.on('error', function(error) {
