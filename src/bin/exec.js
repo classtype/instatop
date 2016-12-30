@@ -22,18 +22,27 @@ var exec = function(args, callback) {
     console.log(colors.bgCyan('Старт: "'+ line +'"'));
     
     var command = args.shift();
+    
+// Init
     var ch = spawn(command, args);
     
+// Error
     ch.on('error', function(error) {
         console.log(colors.bgRed('Ошибка: "'+ error +'"'));
         process.exit();
     });
+    
+// StdOut
     ch.stdout.on('data', function(data) {
         streem(data, 'green');
     });
+    
+// StdErr
     ch.stderr.on('data', function(data) {
         streem(data, 'red');
     });
+    
+// Close
     ch.on('close', function(code) {
         callback(null);
     });

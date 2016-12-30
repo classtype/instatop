@@ -15,7 +15,9 @@ var streem = function(message, color) {
 var exec = function(ssh, command, callback) {
     console.log(colors.bgCyan('Старт: "'+ command +'"'));
     
+// Init
     ssh.exec(command, function(error, ch) {
+    // Error
         if (error) {
             console.log(colors.bgRed('Ошибка: "'+ error +'"'));
             return;
