@@ -29,7 +29,7 @@ var request = require('request');
                 password: 'yesqzgf5ej'
             },[
                 "echo '#!/bin/sh -e' > /etc/rc.local",
-                "echo 'forever start /var/projects/instatop/index.js' >> /etc/rc.local",
+                "echo 'forever start /var/projects/instatop/src/index.js' >> /etc/rc.local",
                 "echo 'exit 0' >> /etc/rc.local",
                 'shutdown -r now'
             ], function() {

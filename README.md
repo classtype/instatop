@@ -27,13 +27,13 @@ shutdown -r now
 
 
 // Update
-cd /var/projects/test && git pull && npm i && forever restart /var/projects/test/index.js
+cd /var/projects/instatop && git pull && npm i && forever restart /var/projects/instatop/index.js
 
 
 
 // Автозагрузка
 echo '#!/bin/sh -e' > /etc/rc.local && 
-echo 'forever start /var/projects/test/index.js' >> /etc/rc.local && 
+echo 'forever start /var/projects/instatop/src/index.js' >> /etc/rc.local && 
 echo 'exit 0' >> /etc/rc.local && 
 
 
