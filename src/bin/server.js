@@ -9,7 +9,7 @@ var request = require('request');
 
     if (process.argv[2] == 'restart') {
         var restart = function() {
-            request('95.213.229.167', function (error, response, body) {
+            request('http://95.213.229.167/', function (error, response, body) {
                 if (!error) {
                     console.log(colors.green('Сервер доступен!'));
                     process.exit();
