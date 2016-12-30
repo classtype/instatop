@@ -57,8 +57,7 @@ var request = require('request');
                 'password '+ config.mysql.password +'" | sudo debconf-set-selections',
                 'echo "mysql-server mysql-server/root_password_again '+
                 'password '+ config.mysql.password +'" | sudo debconf-set-selections',
-                'apt-get install mysql-server mysql-client mysql-common -y',
-                'mysql && CREATE DATABASE '+ config.mysql.database +'; SHOW DATABASES; EXIT;'
+                'apt-get install mysql-server mysql-client mysql-common -y'
             ], function() {
                 console.log(colors.bgGreen('Установка завершена!'));
             });
