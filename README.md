@@ -59,3 +59,6 @@ CREATE DATABASE Test; SHOW DATABASES; EXIT;
 // Reinstall MySQL
 mysql && 
 DROP DATABASE Test; SHOW DATABASES; EXIT;
+
+
+https://gist.github.com/sheikhwaqas/9088872

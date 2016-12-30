@@ -2,9 +2,7 @@ var config = require('./bin/config');
 var mysql = require('mysql');
 var http = require('http');
 
-var connection = mysql.createConnection({
-    user: 'root'
-});
+var connection = mysql.createConnection(config.mysql);
 
 var sql = 'Mysql none.';
 
@@ -13,7 +11,6 @@ connection.connect(function(err) {
         sql = 'error connecting: '+ err.stack;
         return;
     }
-    
     sql = 'connected as id '+ connection.threadId;
 });
 
