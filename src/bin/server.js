@@ -5,6 +5,42 @@ var colors = require('colors/safe');
 var exec = require('./exec');
 var ssh = require('./ssh');
 var request = require('request');
+
+/*--------------------------------------------------------------------------------------------------
+|
+| -> Создание базы данных
+|
+|-------------------------------------------------------------------------------------------------*/
+
+    if (process.argv[2] == 'db' && process.argv[3] == 'add') {
+    // Очищаем консоль
+        exec([['clear']], function() {
+        // Заходим на сервер
+            ssh(config.ssh, [
+                'mysql && CREATE DATABASE '+ process.argv[4] +'; SHOW DATABASES; EXIT;',
+            ], function() {
+                console.log(colors.bgGreen('Установка завершена!'));
+            });
+        });
+    }
+    
+/*--------------------------------------------------------------------------------------------------
+|
+| -> Удаление базы данных
+|
+|-------------------------------------------------------------------------------------------------*/
+
+    if (process.argv[2] == 'db' && process.argv[3] == 'remove') {
+    // Очищаем консоль
+        exec([['clear']], function() {
+        // Заходим на сервер
+            ssh(config.ssh, [
+                'mysql && DROP DATABASE '+ process.argv[4] +'; SHOW DATABASES; EXIT;',
+            ], function() {
+                console.log(colors.bgGreen('Установка завершена!'));
+            });
+        });
+    }
     
 /*--------------------------------------------------------------------------------------------------
 |
@@ -12,6 +48,18 @@ var request = require('request');
 |
 |-------------------------------------------------------------------------------------------------*/
 
+    if (process.argv[2] == 'i') {
+    // Очищаем консоль
+        exec([['clear']], function() {
+        // Заходим на сервер
+            ssh(config.ssh, [
+                'apt-get install mysql-server mysql-client mysql-common -y'
+            ], function() {
+                console.log(colors.bgGreen('Установка завершена!'));
+            });
+        });
+    }
+    
     if (process.argv[2] == 'install') {
     // Очищаем консоль
         exec([['clear']], function() {
@@ -33,6 +81,9 @@ var request = require('request');
                 "echo '#!/bin/sh -e' > /etc/rc.local",
                 "echo 'forever start "+ config.path +"/"+ config.startNode +"' >> /etc/rc.local",
                 "echo 'exit 0' >> /etc/rc.local"
+            // Установка mysql
+                //'apt-get install mysql-server mysql-client mysql-common -y',
+                //'mysql && CREATE DATABASE '+ config.mysqlBase +'; SHOW DATABASES; EXIT;'
             ], function() {
                 console.log(colors.bgGreen('Установка завершена!'));
             });

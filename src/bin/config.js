@@ -5,10 +5,11 @@ var cfg = {};
 cfg.host = '95.213.229.167';
 cfg.port = 22;
 cfg.username = 'root';
-cfg.password = 'neo9t3yx52';
+cfg.password = 'k0i3n1eqxd';
 cfg.path = '/var/projects/instatop';
 cfg.gitURL = 'https://github.com/classtype/instatop.git';
 cfg.startNode = 'src/index.js';
+cfg.mysqlBase = 'Test';
 
 cfg.url = 'http://'+ cfg.host +'/';
 
