@@ -2,7 +2,7 @@
 ssh -o StrictHostKeyChecking=no root@95.213.229.167
 yesqzgf5ej
 
-44
+
 
 // Git push
 git add . && git commit --amend -m "update" && git push -f
