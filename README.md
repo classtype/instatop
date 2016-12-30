@@ -31,13 +31,6 @@ cd /var/projects/instatop && git pull && npm i && forever restart /var/projects/
 
 
 
-// Автозагрузка
-echo '#!/bin/sh -e' > /etc/rc.local && 
-echo 'forever start /var/projects/instatop/src/index.js' >> /etc/rc.local && 
-echo 'exit 0' >> /etc/rc.local && 
-
-
-
 // Install
 apt-get update && 
 apt-get install htop -y && 
@@ -46,6 +39,13 @@ apt-get install curl -y &&
 apt-get install git -y && 
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs && 
 npm install -g forever && 
+
+
+
+// Автозагрузка
+echo '#!/bin/sh -e' > /etc/rc.local && 
+echo 'forever start /var/projects/instatop/src/index.js' >> /etc/rc.local && 
+echo 'exit 0' >> /etc/rc.local && 
 
 
 

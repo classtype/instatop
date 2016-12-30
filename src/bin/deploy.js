@@ -15,12 +15,12 @@ exec([
 ], function() {
 // Заходим на сервер
     ssh(config.ssh, [
-        'rm -rf /var/projects/instatop',
-        'mkdir -p /var/projects/instatop',
-        'git clone https://github.com/classtype/instatop.git /var/projects/instatop',
-        'cd /var/projects/instatop && npm i --unsafe-perm',
+        'rm -rf '+ config.path,
+        'mkdir -p '+ config.path,
+        'git clone '+ config.gitURL +' '+config.path,
+        'cd '+ config.path +' && npm i --unsafe-perm',
         'forever stopall',
-        'forever start /var/projects/instatop/src/index.js'
+        'forever start '+ config.path +'/'+ config.startNode
     ]);
 });
 
