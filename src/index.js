@@ -2,7 +2,10 @@ var config = require('./bin/config');
 var mysql = require('mysql');
 var http = require('http');
 
-var connection = mysql.createConnection(config.mysql);
+var connection = mysql.createConnection({
+    user: 'root',
+    password: 'Test'
+});
 
 var sql = 'Mysql none.';
 
