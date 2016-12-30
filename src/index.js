@@ -21,7 +21,7 @@ connection.connect(function(err) {
 
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Всем привет!\n' + '<br>sql: '+ sql);
+    res.end('2Всем привет!\n' + '<br>sql: '+ sql);
 }).listen(process.env.PORT||80, process.env.IP||null);
 
 console.log('Server running at.');
