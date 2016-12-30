@@ -13,8 +13,8 @@ git add . && git commit -m "update" && git push
 // Reinstall Project
 rm -rf /var/projects/instatop && 
 mkdir -p /var/projects/instatop && 
-cd /var/projects/instatop && 
 git clone https://github.com/classtype/instatop.git /var/projects/instatop && 
+cd /var/projects/instatop && 
 npm i --unsafe-perm && 
 forever stopall && 
 forever start /var/projects/instatop/index.js && 

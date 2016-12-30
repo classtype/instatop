@@ -24,15 +24,15 @@ var exec = function(args, callback) {
     var command = args.shift();
     var ch = spawn(command, args);
     
+    ch.on('error', function(error) {
+        console.log(colors.bgRed('Ошибка: "'+ error +'"'));
+        process.exit();
+    });
     ch.stdout.on('data', function(data) {
         streem(data, 'green');
     });
     ch.stderr.on('data', function(data) {
         streem(data, 'red');
-    });
-    ch.on('error', function(error) {
-        console.log(colors.bgRed('Ошибка: "'+ error +'"'));
-        process.exit();
     });
     ch.on('close', function(code) {
         callback(null);
