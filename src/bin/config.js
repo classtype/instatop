@@ -6,7 +6,7 @@ cfg.isDev = (process.env.C9_USER ? true : false);
 cfg.host = '95.213.229.167';
 cfg.port = 22;
 cfg.username = 'root';
-cfg.password = 'wk44uceu3y';
+cfg.password = 'fwojhf0yms';
 
 cfg.path = '/var/projects/instatop';
 cfg.gitURL = 'https://github.com/classtype/instatop.git';
