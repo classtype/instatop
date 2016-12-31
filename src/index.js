@@ -17,10 +17,15 @@ connection.connect(function(err) {
     sql = 'connected as id '+ connection.threadId;
 });
 
+connection.query(
+    "CREATE DATABASE IF NOT EXISTS `"+ config.mysql.database +"` "+
+    "DEFAULT CHARACTER SET = 'utf8' DEFAULT COLLATE 'utf8_general_ci'"
+);
+
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     
-    connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+    connection.query('SHOW DATABASES;', function(err, rows, fields) {
         if (err) throw err;
         res.end('Всем привет!\n'+ rows[0].solution + '\nsql: '+ sql);
     });

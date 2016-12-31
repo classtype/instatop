@@ -84,10 +84,13 @@ var request = require('request');
             // Добавляем в /etc/rc.local автозапуск src/index.js
                 "echo '#!/bin/sh -e' > /etc/rc.local",
                 "echo 'forever start "+ config.path +"/"+ config.startNode +"' >> /etc/rc.local",
-                "echo 'exit 0' >> /etc/rc.local"
+                "echo 'exit 0' >> /etc/rc.local",
             // Установка mysql
-                //'apt-get install mysql-server mysql-client mysql-common -y',
-                //'mysql && CREATE DATABASE '+ config.mysql.database +'; SHOW DATABASES; EXIT;'
+                'echo "mysql-server mysql-server/root_password '+
+                'password '+ config.mysql.password +'" | sudo debconf-set-selections',
+                'echo "mysql-server mysql-server/root_password_again '+
+                'password '+ config.mysql.password +'" | sudo debconf-set-selections',
+                'apt-get install mysql-server mysql-client mysql-common -y'
             ], function() {
                 console.log(colors.bgGreen('Установка завершена!'));
             });
