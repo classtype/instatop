@@ -19,7 +19,12 @@ connection.connect(function(err) {
 
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('123Всем привет!\n' + '<br>sql: '+ sql);
+    
+    connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+        if (err) throw err;
+        res.end('123Всем привет!<br>'+ rows[0].solution + '<br>sql: '+ sql);
+    });
+    
 }).listen(process.env.PORT||80, process.env.IP||null);
 
 console.log('Server running at.');
