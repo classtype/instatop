@@ -3,8 +3,8 @@ var mysql = require('mysql');
 var http = require('http');
 
 var connection = mysql.createConnection({
-    user: 'root',
-    password: 'Test'
+    user: config.mysql.user,
+    password: config.mysql.password
 });
 
 var sql = 'Mysql none.';
@@ -25,7 +25,7 @@ connection.query(
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     
-    connection.query('SHOW DATABASES;', function(err, rows, fields) {
+    connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
         if (err) throw err;
         res.end('Всем привет!\n'+ rows[0].solution + '\nsql: '+ sql);
     });
