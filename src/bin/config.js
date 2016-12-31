@@ -6,7 +6,8 @@ cfg.isDev = (process.env.C9_USER ? true : false);
 cfg.host = '95.213.229.167';
 cfg.port = 22;
 cfg.username = 'root';
-cfg.password = '28ysdjfxfk';
+cfg.password = 'wk44uceu3y';
+
 cfg.path = '/var/projects/instatop';
 cfg.gitURL = 'https://github.com/classtype/instatop.git';
 cfg.startNode = 'src/index.js';
@@ -25,9 +26,16 @@ cfg.http = {
 };
 
 cfg.mysql = {
-    username: 'root',
     password: 'Test',
-    database: 'Test'
+    database: 'Test',
+    connect: {}
+};
+
+cfg.mysql.connect = {
+    host: 'localhost',
+    user: 'root',
+    password: cfg.mysql.password,
+    database: null
 };
 
 //--------------------------------------------------------------------------------------------------
@@ -35,9 +43,10 @@ cfg.mysql = {
     if (cfg.isDev) {
         cfg.http.IP = process.env.IP;
         cfg.http.PORT = process.env.PORT;
-        cfg.mysql.username = 'username';
-        cfg.mysql.password = '';
-        cfg.mysql.database = 'c9';
+        
+        cfg.mysql.connect.user = 'classtype';
+        cfg.mysql.connect.password = '';
+        cfg.mysql.connect.database = 'c9';
     }
     
 //--------------------------------------------------------------------------------------------------

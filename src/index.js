@@ -2,10 +2,7 @@ var config = require('./bin/config');
 var mysql = require('mysql');
 var http = require('http');
 
-var connection = mysql.createConnection({
-    user: config.mysql.username,
-    password: config.mysql.password
-});
+var connection = mysql.createConnection(config.mysql.connect);
 
 var sql = 'Mysql none.';
 
@@ -26,11 +23,10 @@ http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     
     connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-        //if (err) throw err;
-        //res.end('Всем привет!\n'+ rows[0].solution +'\nsql: '+ sql);
-        res.end('Всем привет!\nsql: '+ sql);
+        if (err) throw err;
+        res.end('Всем привет!\n'+ rows[0].solution +'\nsql: '+ sql);
     });
     
-}).listen(process.env.PORT||80, config.IP);
+}).listen(config.http.PORT, config.http.IP);
 
 console.log('Server running at.');

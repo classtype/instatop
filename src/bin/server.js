@@ -24,6 +24,12 @@ var request = require('request');
                 'apt-get install curl -y',
             // Установка git
                 'apt-get install git -y',
+            // Установка mysql
+                'echo "mysql-server mysql-server/root_password '+
+                'password '+ config.mysql.password +'" | sudo debconf-set-selections',
+                'echo "mysql-server mysql-server/root_password_again '+
+                'password '+ config.mysql.password +'" | sudo debconf-set-selections',
+                'apt-get install mysql-server mysql-client mysql-common -y',
             // Установка node
                 'curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && '+
                 'sudo apt-get install -y nodejs',
@@ -32,13 +38,7 @@ var request = require('request');
             // Добавляем в /etc/rc.local автозапуск src/index.js
                 "echo '#!/bin/sh -e' > /etc/rc.local",
                 "echo 'forever start "+ config.path +"/"+ config.startNode +"' >> /etc/rc.local",
-                "echo 'exit 0' >> /etc/rc.local",
-            // Установка mysql
-                'echo "mysql-server mysql-server/root_password '+
-                'password '+ config.mysql.password +'" | sudo debconf-set-selections',
-                'echo "mysql-server mysql-server/root_password_again '+
-                'password '+ config.mysql.password +'" | sudo debconf-set-selections',
-                'apt-get install mysql-server mysql-client mysql-common -y'
+                "echo 'exit 0' >> /etc/rc.local"
             ], function() {
                 console.log(colors.bgGreen('Установка завершена!'));
             });
