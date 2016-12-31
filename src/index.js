@@ -22,7 +22,7 @@ http.createServer(function (req, res) {
     
     connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
         if (err) throw err;
-        res.end('123Всем привет!<br>'+ rows[0].solution + '<br>sql: '+ sql);
+        res.end('123Всем привет!\n'+ rows[0].solution + '\nsql: '+ sql);
     });
     
 }).listen(process.env.PORT||80, process.env.IP||null);
