@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var http = require('http');
 
 var connection = mysql.createConnection({
-    user: config.mysql.user,
+    user: config.mysql.username,
     password: config.mysql.password
 });
 
@@ -28,9 +28,9 @@ http.createServer(function (req, res) {
     connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
         //if (err) throw err;
         //res.end('Всем привет!\n'+ rows[0].solution +'\nsql: '+ sql);
-        res.end('"' + process.env.C9_USER + '" = Всем привет!\nsql: '+ sql);
+        res.end('Всем привет!\nsql: '+ sql);
     });
     
-}).listen(process.env.PORT||80, process.env.IP||null);
+}).listen(process.env.PORT||80, config.IP);
 
 console.log('Server running at.');

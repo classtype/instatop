@@ -8,62 +8,10 @@ var request = require('request');
 
 /*--------------------------------------------------------------------------------------------------
 |
-| -> Создание базы данных
-|
-|-------------------------------------------------------------------------------------------------*/
-
-    if (process.argv[2] == 'db' && process.argv[3] == 'add') {
-    // Очищаем консоль
-        exec([['clear']], function() {
-        // Заходим на сервер
-            ssh(config.ssh, [
-                'mysql && CREATE DATABASE '+ process.argv[4] +'; SHOW DATABASES; EXIT;',
-            ], function() {
-                console.log(colors.bgGreen('Установка завершена!'));
-            });
-        });
-    }
-    
-/*--------------------------------------------------------------------------------------------------
-|
-| -> Удаление базы данных
-|
-|-------------------------------------------------------------------------------------------------*/
-
-    if (process.argv[2] == 'db' && process.argv[3] == 'remove') {
-    // Очищаем консоль
-        exec([['clear']], function() {
-        // Заходим на сервер
-            ssh(config.ssh, [
-                'mysql && DROP DATABASE '+ process.argv[4] +'; SHOW DATABASES; EXIT;',
-            ], function() {
-                console.log(colors.bgGreen('Установка завершена!'));
-            });
-        });
-    }
-    
-/*--------------------------------------------------------------------------------------------------
-|
 | -> Установка сервера
 |
 |-------------------------------------------------------------------------------------------------*/
 
-    if (process.argv[2] == 'i') {
-    // Очищаем консоль
-        exec([['clear']], function() {
-        // Заходим на сервер
-            ssh(config.ssh, [
-                'echo "mysql-server mysql-server/root_password '+
-                'password '+ config.mysql.password +'" | sudo debconf-set-selections',
-                'echo "mysql-server mysql-server/root_password_again '+
-                'password '+ config.mysql.password +'" | sudo debconf-set-selections',
-                'apt-get install mysql-server mysql-client mysql-common -y'
-            ], function() {
-                console.log(colors.bgGreen('Установка завершена!'));
-            });
-        });
-    }
-    
     if (process.argv[2] == 'install') {
     // Очищаем консоль
         exec([['clear']], function() {
