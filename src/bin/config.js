@@ -24,6 +24,8 @@ cfg.ssh = {
     password: cfg.password
 };
 
+cfg.IP = process.env.C9_USER ? null : process.env.IP;
+
 module.exports = cfg;
 
 //--------------------------------------------------------------------------------------------------

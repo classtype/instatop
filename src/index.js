@@ -26,8 +26,9 @@ http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     
     connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-        if (err) throw err;
-        res.end('Всем привет!\n'+ rows[0].solution + '\nsql: '+ sql);
+        //if (err) throw err;
+        //res.end('Всем привет!\n'+ rows[0].solution +'\nsql: '+ sql);
+        res.end('"' + process.env.C9_USER + '" = Всем привет!\nsql: '+ sql);
     });
     
 }).listen(process.env.PORT||80, process.env.IP||null);
