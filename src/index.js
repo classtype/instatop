@@ -1,4 +1,4 @@
-var config = require('./bin/config');
+var config = require('./config');
 var mysql = require('mysql');
 var http = require('http');
 

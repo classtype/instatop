@@ -6,7 +6,7 @@ var path = require('path');
 
 require(
     path.resolve(
-        __dirname, '..', '..', 'src', 'bin', path.basename(__filename)
+        __dirname, '..', '..', 'bin', 'lib', path.basename(__filename)
     )
 );
 

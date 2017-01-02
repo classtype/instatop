@@ -46,7 +46,6 @@ cfg.mysql.connect = {
         
         cfg.mysql.connect.user = 'classtype';
         cfg.mysql.connect.password = '';
-        cfg.mysql.connect.database = 'c9';
     }
     
 //--------------------------------------------------------------------------------------------------

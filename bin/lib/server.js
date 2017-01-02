@@ -1,6 +1,11 @@
 //--------------------------------------------------------------------------------------------------
 
-var config = require('./config');
+var path = require('path');
+var config = require(
+    path.resolve(
+        __dirname, '..', '..', 'src', 'config'
+    )
+);
 var colors = require('colors/safe');
 var exec = require('./exec');
 var ssh = require('./ssh');
