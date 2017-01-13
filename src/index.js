@@ -33,7 +33,7 @@ connection.querys(require('./sql_create'), function(err) {
 }, function() {
     var sql =
     "SELECT * FROM `users` " +
-    "WHERE `user_name` = 'yana_havana1' LIMIT 1";
+    "WHERE `user_name` = 'yana_havana' LIMIT 1";
     
     connection.query(sql, function(err, rows, fields) {
         if (err) return log('SQL ERROR: ' + err);
