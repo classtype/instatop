@@ -1,3 +1,43 @@
+// users
+user_id
+user_name
+last_day(.getDay())(0-6)
+
+
+// count_day
+user_id
+count
+time
+
+
+// users_full
+user_id
+last_m(0-59)
+last_h(0-24)
+
+
+// count_hours
+user_id
+count
+time
+
+
+// count_minutes
+user_id
+count
+time
+
+
+// count_seconds
+user_id
+count
+time
+
+
+
+
+
+
 // Вход
 ssh -o StrictHostKeyChecking=no root@95.213.229.167
 <пароль>
