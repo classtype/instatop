@@ -4,34 +4,34 @@ user_name
 last_day(.getDay())(0-6)
 
 
+// users_full
+user_id
+user_name
+last_hour(.getHours())(0-23)
+
+
 // count_day
 user_id
 count
 time
 
 
-// users_full
-user_id
-last_m(0-59)
-last_h(0-24)
-
-
-// count_hours
+// count_hour
 user_id
 count
 time
 
 
-// count_minutes
+// count_minute
 user_id
 count
 time
 
 
-// count_seconds
-user_id
-count
-time
+
+
+
+
 
 
 

@@ -6,9 +6,11 @@
     },
     "dependencies": {
         "colors": "1.0.3",
+        "express": "*",
         "request": "*",
         "mysql": "*",
         "async": "*",
-        "ssh2": "*"
+        "ssh2": "*",
+        "app.init": "*"
     }
 }

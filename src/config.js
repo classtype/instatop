@@ -3,10 +3,10 @@
 var cfg = {};
 
 cfg.isDev = (process.env.C9_USER ? true : false);
-cfg.host = '95.213.159.220';
+cfg.host = '95.213.230.199';
 cfg.port = 22;
 cfg.username = 'root';
-cfg.password = '72auxmrxha';
+cfg.password = 'p4ue9yfx8k';
 
 cfg.path = '/var/projects/instatop';
 cfg.gitURL = 'https://github.com/classtype/instatop.git';
