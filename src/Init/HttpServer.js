@@ -11,9 +11,11 @@ fs.readFile('./Static/index.html', 'utf8', function(err, data) {
         $.log(err);
         return;
     }
-    $.log('./Static/index.html -> Loaded!');
+    
     page_content += data;
 });
+
+$.log('patch: '+ __filename);
 
 //--------------------------------------------------------------------------------------------------
 
