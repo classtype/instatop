@@ -95,7 +95,9 @@ h1 {font-weight:bold;}
                     return data;
                 };
                 
-                Chart('#chart_'+ t, parse(charts[t]));
+                if (charts[t].length > 1) {
+                    Chart('#chart_'+ t, parse(charts[t]));
+                }
             }
         });
     </script>
