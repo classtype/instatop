@@ -1,12 +1,13 @@
 //--------------------------------------------------------------------------------------------------
 
 var express = require('express');
+var path = require('path');
 var fs = require('fs');
 var page_content = '';
 
 //--------------------------------------------------------------------------------------------------
 
-fs.readFile('/var/projects/instatop/src/Static/index.html', 'utf8', function(err, data) {
+fs.readFile(path.resolve(__dirname, '..', '..', 'src', 'Static', 'index.html'), 'utf8', function(err, data) {
     if (err) {
         $.log(err);
         return;
