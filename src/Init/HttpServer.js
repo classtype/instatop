@@ -6,7 +6,7 @@ var page_content = '';
 
 //--------------------------------------------------------------------------------------------------
 
-fs.readFile('./Static/index.html', 'utf8', function(err, data) {
+fs.readFile('/var/projects/instatop/src/Static/index.html', 'utf8', function(err, data) {
     if (err) {
         $.log(err);
         return;
