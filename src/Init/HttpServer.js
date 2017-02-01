@@ -80,25 +80,19 @@ $.InitHttpServer = function() {
                     json.total = json.total || rows[rows.length - 1].count;
                     
                 // За последние 15 минут
-                    json.minute[2] = (rows.length - 16 >= 0 ? json.total - rows[rows.length - 16].count : json.total - rows[0].count);
-                    
-                // За последние 30 минут
-                    json.minute[1] = (rows.length - 31 >= 0 ? json.total - rows[rows.length - 31].count : json.total - rows[0].count);
+                    json.minute[0] = (rows.length - 16 >= 0 ? json.total - rows[rows.length - 16].count : json.total - rows[0].count);
                     
                 // За последние 60 минут
-                    json.minute[0] = (rows.length - 61 >= 0 ? json.total - rows[rows.length - 61].count : json.total - rows[0].count);
+                    json.minute[1] = (rows.length - 61 >= 0 ? json.total - rows[rows.length - 61].count : json.total - rows[0].count);
                     
                 // За последние 3 часа
-                    json.hour[2] = (rows.length - 181 >= 0 ? json.total - rows[rows.length - 181].count : json.total - rows[0].count);
-                    
-                // За последние 6 часов
-                    json.hour[1] = (rows.length - 361 >= 0 ? json.total - rows[rows.length - 361].count : json.total - rows[0].count);
+                    json.hour[0] = (rows.length - 181 >= 0 ? json.total - rows[rows.length - 181].count : json.total - rows[0].count);
                     
                 // За последние 12 часов
-                    json.hour[0] = (rows.length - 721 >= 0 ? json.total - rows[rows.length - 721].count : json.total - rows[0].count);
+                    json.hour[1] = (rows.length - 721 >= 0 ? json.total - rows[rows.length - 721].count : json.total - rows[0].count);
                     
                 // За последний 1 день
-                    json.day[2] = json.total - rows[0].count;
+                    json.day[0] = json.total - rows[0].count;
                 }
                 
                 var sql =
@@ -127,19 +121,16 @@ $.InitHttpServer = function() {
                             json.total = json.total || rows[rows.length - 1].count;
                             
                         // За последний 1 день
-                            json.day[2] = json.day[2] || (rows.length - 2 >= 0 ? json.total - rows[rows.length - 2].count : 0);
+                            json.day[0] = json.day[0] || (rows.length - 2 >= 0 ? json.total - rows[rows.length - 2].count : 0);
                             
                         // За последние 7 дней
                             json.day[1] = (rows.length - 8 >= 0 ? json.total - rows[rows.length - 8].count : json.total - rows[0].count);
-                            
-                        // За последние 14 дней
-                            json.day[0] = (rows.length - 15 >= 0 ? json.total - rows[rows.length - 15].count : json.total - rows[0].count);
                         }
                         
                     // Форматируем
                         for (var t in json.charts) {
                             for (var i = 0; i < json[t].length; i++) {
-                                json[t][i] =  [(json[t][i] > 0 ? '+' : '–'), Math.abs(json[t][i]).toLocaleString()];
+                                json[t][i] =  [(json[t][i] >= 0 ? '+' : '–'), Math.abs(json[t][i]).toLocaleString()];
                             }
                         }
                         
@@ -159,3 +150,6 @@ $.InitHttpServer = function() {
 };
 
 //--------------------------------------------------------------------------------------------------
+/*
+Идея поменять местами 60/30/15 на 15/30/60
+*/

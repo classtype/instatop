@@ -18,6 +18,7 @@ h1 span {font-size:24px; font-weight:normal;}
 
 .green {color:#008800;}
 .red {color:#880000;}
+.gray {color:#999999;}
 </style>
 </head>
 <body>
@@ -92,17 +93,16 @@ h1 span {font-size:24px; font-weight:normal;}
                 
             var charts = json.charts;
             var chart_msg = {
-                minute: '60/30/15 минут',
-                hour: '12/6/3 часов',
-                day: '14/7/1 дней'
+                minute: '15/60 минут',
+                hour: '3/12 часов',
+                day: '1/7 дней'
             };
             
             for (var t in charts) {
                 document.getElementById('chart-count-'+ t).innerHTML =
                 '(за последние '+ chart_msg[t] +': ' +
-                '<b class="'+ (json[t][0][0] == '+' ? 'green' : 'red') +'">'+ json[t][0][0] + json[t][0][1] +'</b>/' +
-                '<b class="'+ (json[t][1][0] == '+' ? 'green' : 'red') +'">'+ json[t][1][0] + json[t][1][1] +'</b>/' +
-                '<b class="'+ (json[t][2][0] == '+' ? 'green' : 'red') +'">'+ json[t][2][0] + json[t][2][1] +'</b>)';
+                '<b class="'+ (json[t][0][1] == '0' ? 'gray' : (json[t][0][0] == '+' ? 'green': 'red')) +'">'+ json[t][0][0] + json[t][0][1] +'</b>/' +
+                '<b class="'+ (json[t][1][1] == '0' ? 'gray' : (json[t][1][0] == '+' ? 'green': 'red')) +'">'+ json[t][1][0] + json[t][1][1] +'</b>)';
                 
                 if (charts[t].length >= 1) {
                     for (var i = 0; i < charts[t].length; i++) {
