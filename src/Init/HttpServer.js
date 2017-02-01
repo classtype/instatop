@@ -65,28 +65,28 @@ $.InitHttpServer = function() {
             };
             
             var sql =
-                "SELECT * FROM `count_day` " +
+                "SELECT * FROM `count_minute` " +
                 "WHERE `user_id` = ? " +
                 "ORDER BY `time` ASC";
                 
             $.query(sql, [user_id], function(row, rows) {
                 for (var i = 0; i < rows.length; i++) {
-                    json.charts.day.push([rows[i].time, rows[i].count]);
+                    json.charts.minute.push([rows[i].time, rows[i].count]);
                 }
                 
-            // По дням
+            // По минутам
                 if (rows.length) {
                 // Всего подписчиков
-                    json.total = rows[rows.length - 1].count;
+                    json.total = json.total || rows[rows.length - 1].count;
                     
-                // За последний 1 день
-                    json.day[2] = (rows.length - 2 >= 0 ? json.total - rows[rows.length - 2].count : 0);
+                // За последние 15 минут
+                    json.minute[2] = (rows.length - 16 >= 0 ? json.total - rows[rows.length - 16].count : json.total - rows[0].count);
                     
-                // За последние 7 дней
-                    json.day[1] = (rows.length - 8 >= 0 ? json.total - rows[rows.length - 8].count : json.total - rows[0].count);
+                // За последние 30 минут
+                    json.minute[1] = (rows.length - 31 >= 0 ? json.total - rows[rows.length - 31].count : json.total - rows[0].count);
                     
-                // За последние 14 дней
-                    json.day[0] = (rows.length - 15 >= 0 ? json.total - rows[rows.length - 15].count : json.total - rows[0].count);
+                // За последние 60 минут
+                    json.minute[0] = (rows.length - 61 >= 0 ? json.total - rows[rows.length - 61].count : json.total - rows[0].count);
                 }
                 
                 var sql =
@@ -102,7 +102,7 @@ $.InitHttpServer = function() {
                 // По часам
                     if (rows.length) {
                     // Всего подписчиков
-                        json.total = rows[rows.length - 1].count;
+                        json.total = json.total || rows[rows.length - 1].count;
                         
                     // За последние 3 часа
                         json.hour[2] = (rows.length - 5 >= 0 ? json.total - rows[rows.length - 5].count : json.total - rows[0].count);
@@ -115,28 +115,28 @@ $.InitHttpServer = function() {
                     }
                     
                     var sql =
-                        "SELECT * FROM `count_minute` " +
+                        "SELECT * FROM `count_day` " +
                         "WHERE `user_id` = ? " +
                         "ORDER BY `time` ASC";
                         
                     $.query(sql, [user_id], function(row, rows) {
                         for (var i = 0; i < rows.length; i++) {
-                            json.charts.minute.push([rows[i].time, rows[i].count]);
+                            json.charts.day.push([rows[i].time, rows[i].count]);
                         }
                         
-                    // По минутам
+                    // По дням
                         if (rows.length) {
                         // Всего подписчиков
-                            json.total = rows[rows.length - 1].count;
+                            json.total = json.total || rows[rows.length - 1].count;
                             
-                        // За последние 15 минут
-                            json.minute[2] = (rows.length - 16 >= 0 ? json.total - rows[rows.length - 16].count : json.total - rows[0].count);
+                        // За последний 1 день
+                            json.day[2] = (rows.length - 2 >= 0 ? json.total - rows[rows.length - 2].count : 0);
                             
-                        // За последние 30 минут
-                            json.minute[1] = (rows.length - 31 >= 0 ? json.total - rows[rows.length - 31].count : json.total - rows[0].count);
+                        // За последние 7 дней
+                            json.day[1] = (rows.length - 8 >= 0 ? json.total - rows[rows.length - 8].count : json.total - rows[0].count);
                             
-                        // За последние 60 минут
-                            json.minute[0] = (rows.length - 61 >= 0 ? json.total - rows[rows.length - 61].count : json.total - rows[0].count);
+                        // За последние 14 дней
+                            json.day[0] = (rows.length - 15 >= 0 ? json.total - rows[rows.length - 15].count : json.total - rows[0].count);
                         }
                         
                     // Форматируем
