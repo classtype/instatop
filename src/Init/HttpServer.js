@@ -87,6 +87,18 @@ $.InitHttpServer = function() {
                     
                 // За последние 60 минут
                     json.minute[0] = (rows.length - 61 >= 0 ? json.total - rows[rows.length - 61].count : json.total - rows[0].count);
+                    
+                // За последние 3 часа
+                    json.hour[2] = (rows.length - 181 >= 0 ? json.total - rows[rows.length - 181].count : json.total - rows[0].count);
+                    
+                // За последние 6 часов
+                    json.hour[1] = (rows.length - 361 >= 0 ? json.total - rows[rows.length - 361].count : json.total - rows[0].count);
+                    
+                // За последние 12 часов
+                    json.hour[0] = (rows.length - 721 >= 0 ? json.total - rows[rows.length - 721].count : json.total - rows[0].count);
+                    
+                // За последний 1 день
+                    json.day[2] = json.total - rows[0].count;
                 }
                 
                 var sql =
@@ -97,21 +109,6 @@ $.InitHttpServer = function() {
                 $.query(sql, [user_id], function(row, rows) {
                     for (var i = 0; i < rows.length; i++) {
                         json.charts.hour.push([rows[i].time, rows[i].count]);
-                    }
-                    
-                // По часам
-                    if (rows.length) {
-                    // Всего подписчиков
-                        json.total = json.total || rows[rows.length - 1].count;
-                        
-                    // За последние 3 часа
-                        json.hour[2] = (rows.length - 5 >= 0 ? json.total - rows[rows.length - 5].count : json.total - rows[0].count);
-                        
-                    // За последние 6 часов
-                        json.hour[1] = (rows.length - 7 >= 0 ? json.total - rows[rows.length - 7].count : json.total - rows[0].count);
-                        
-                    // За последние 12 часов
-                        json.hour[0] = (rows.length - 13 >= 0 ? json.total - rows[rows.length - 13].count : json.total - rows[0].count);
                     }
                     
                     var sql =
@@ -130,7 +127,7 @@ $.InitHttpServer = function() {
                             json.total = json.total || rows[rows.length - 1].count;
                             
                         // За последний 1 день
-                            json.day[2] = (rows.length - 2 >= 0 ? json.total - rows[rows.length - 2].count : 0);
+                            json.day[2] = json.day[2] || (rows.length - 2 >= 0 ? json.total - rows[rows.length - 2].count : 0);
                             
                         // За последние 7 дней
                             json.day[1] = (rows.length - 8 >= 0 ? json.total - rows[rows.length - 8].count : json.total - rows[0].count);

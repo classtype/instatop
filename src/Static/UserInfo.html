@@ -24,12 +24,12 @@ h1 span {font-size:24px; font-weight:normal;}
     <div id="blogger-name" class="blogger-name"><b>Загрузка...</b></div>
     <div class="charts">
         <div id="b_minute">
-            <h1>За сутки</h1>
+            <h1>За день</h1>
             <b id="chart-count-minute" class="h1"></b>
             <svg id="chart_minute" width="960" height="350"></svg>
         </div>
         <div id="b_hour">
-            <h1>За 30 дней</h1>
+            <h1>За месяц</h1>
             <b id="chart-count-hour" class="h1"></b>
             <svg id="chart_hour" width="960" height="350"></svg>
         </div>
@@ -92,7 +92,7 @@ h1 span {font-size:24px; font-weight:normal;}
                 
             var charts = json.charts;
             var chart_msg = {
-                minute: '60/30/15 минут:',
+                minute: '60/30/15 минут',
                 hour: '12/6/3 часов',
                 day: '14/7/1 дней'
             };
