@@ -3,7 +3,7 @@
 $.InitDBSQL = function() {
     return [
     // Удаляем старую базу данных (временно)
-        "DROP DATABASE IF EXISTS `"+ $.cfg.mysql.database +"`",
+        //"DROP DATABASE IF EXISTS `"+ $.cfg.mysql.database +"`",
         
     // Создаем базу данных
         "CREATE DATABASE IF NOT EXISTS `"+ $.cfg.mysql.database +"` " +
@@ -60,6 +60,14 @@ $.InitDBSQL = function() {
         "INSERT IGNORE INTO `users` (`user_name`) VALUES ('yana_havana')",
         "INSERT IGNORE INTO `users` (`user_name`) VALUES ('timatiofficial')",
         "INSERT IGNORE INTO `users` (`user_name`) VALUES ('kadyrov_95')",
+        "INSERT IGNORE INTO `users` (`user_name`) VALUES ('artempolishchuk')",
+        "INSERT IGNORE INTO `users` (`user_name`) VALUES ('lena_komar')",
+        "INSERT IGNORE INTO `users` (`user_name`) VALUES ('lisavetaav')",
+        "INSERT IGNORE INTO `users` (`user_name`) VALUES ('vladislavderugka')",
+        "INSERT IGNORE INTO `users` (`user_name`) VALUES ('julia_diadyk')",
+        "INSERT IGNORE INTO `users` (`user_name`) VALUES ('tatianatkachuk')",
+        "INSERT IGNORE INTO `users` (`user_name`) VALUES ('sashashapik')",
+        "INSERT IGNORE INTO `users` (`user_name`) VALUES ('andrey.martynenko')",
         
     // Добавляем строки в таблицу "users_full"
         "INSERT IGNORE INTO `users_full` (" +

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<style>
+body {margin:0; color:#333333; font-family:sans-serif; text-rendering:geometricprecision;}
+h1 {margin:50px 0 0; font-size:36px; font-weight:bold; text-align:left;}
+h1 span {font-size:24px; font-weight:normal;}
+#b_day, #b_hour, #b_minute {display:none;}
+
+.blogger-name {padding:15px; background:#CF3476 linear-gradient(0deg, #9B1E55, #CF3476);}
+.blogger-name {color:#FFFFFF; font-size:36px; text-align:center;}
+.blogger-name a {color:#FFFFFF; font-weight:bold; text-decoration:none;}
+
+.h1 {font-size:24px; font-weight:normal;}
+.charts {margin:auto; width:940px;}
+
+.green {color:#008800;}
+.red {color:#880000;}
+</style>
+</head>
+<body>
+    <div id="blogger-name" class="blogger-name"><b>Загрузка...</b></div>
+    <div class="charts">
+        <div id="b_minute">
+            <h1>За сутки</h1>
+            <b id="chart-count-minute" class="h1"></b>
+            <svg id="chart_minute" width="960" height="350"></svg>
+        </div>
+        <div id="b_hour">
+            <h1>За 30 дней</h1>
+            <b id="chart-count-hour" class="h1"></b>
+            <svg id="chart_hour" width="960" height="350"></svg>
+        </div>
+        <div id="b_day">
+            <h1>За все время</h1>
+            <b id="chart-count-day" class="h1"></b>
+            <svg id="chart_day" width="960" height="350"></svg>
+        </div>
+    </div>
+    <script>
+        var Chart = function(chartID, data) {
+            var svg = d3.select(chartID);
+            var margin = {top: 20, right: 20, bottom: 30, left: 50};
+            var width = +svg.attr('width') - margin.left - margin.right;
+            var height = +svg.attr('height') - margin.top - margin.bottom;
+            var g = svg.append('g').attr('transform', 'translate('+ margin.left +','+ margin.top +')');
+            
+            var x = d3.scaleTime().rangeRound([0, width]);
+            var y = d3.scaleLinear().rangeRound([height, 0]);
+            
+            var line = d3.line()
+                .x(function(d) { return x(d.date); })
+                .y(function(d) { return y(d.count); });
+                
+            x.domain(d3.extent(data, function(d) { return d.date; }));
+            y.domain(d3.extent(data, function(d) { return d.count; }));
+            
+            g.append('g')
+                .attr('transform', 'translate(0,'+ height +')')
+                .call(d3.axisBottom(x))
+                .select('.domain')
+                .remove();
+                
+            g.append('g')
+                .call(d3.axisLeft(y))
+                .append('text')
+                .attr('fill', '#000')
+                .attr('transform', 'rotate(-90)')
+                .attr('y', 6)
+                .attr('dy', '0.71em')
+                .attr('text-anchor', 'end')
+                .text('Подписчики');
+                
+            g.append('path')
+                .datum(data)
+                .attr('fill', 'none')
+                .attr('stroke', 'steelblue')
+                .attr('stroke-linejoin', 'round')
+                .attr('stroke-linecap', 'round')
+                .attr('stroke-width', 1.5)
+                .attr('d', line);
+        };
+        
+        d3.json('/user/<%= user_id %>', function(err, json) {
+            if (err) throw err;
+            
+            document.getElementById('blogger-name').innerHTML =
+            '<a href="//instagram.com/<%= user_name %>/" target="_blank">' +
+            '@<%= user_name %></a> (подписчиков: '+ json.total +'<b></b>)';
+                
+            var charts = json.charts;
+            var chart_msg = {
+                minute: '60/30/15 минут:',
+                hour: '12/6/3 часов',
+                day: '14/7/1 дней'
+            };
+            
+            for (var t in charts) {
+                document.getElementById('chart-count-'+ t).innerHTML =
+                '(за последние '+ chart_msg[t] +': ' +
+                '<b class="'+ (json[t][0][0] == '+' ? 'green' : 'red') +'">'+ json[t][0][0] + json[t][0][1] +'</b>/' +
+                '<b class="'+ (json[t][1][0] == '+' ? 'green' : 'red') +'">'+ json[t][1][0] + json[t][1][1] +'</b>/' +
+                '<b class="'+ (json[t][2][0] == '+' ? 'green' : 'red') +'">'+ json[t][2][0] + json[t][2][1] +'</b>)';
+                
+                if (charts[t].length >= 1) {
+                    for (var i = 0; i < charts[t].length; i++) {
+                        var date = new Date(charts[t][i][0] * 1000);
+                        
+                        var year = date.getFullYear();
+                        var month = date.getMonth() + 1;
+                        var day = date.getDate();
+                        var h = date.getHours();
+                        var m = date.getMinutes();
+                        
+                        month = (month < 10 ? '0'+month : month);
+                        h = (h < 10 ? '0'+h : h);
+                        m = (m < 10 ? '0'+m : m);
+                        
+                        charts[t][i][0] = year +'-'+ month +'-'+ day +' '+ h +':'+ m;
+                    }
+                    
+                    Chart('#chart_'+ t, parse(charts[t]));
+                    document.getElementById('b_'+ t).style.display = 'block';
+                }
+            }
+        });
+        
+        var parse = function(charts) {
+            var data = [];
+            
+            for (var i = 0; i < charts.length; i++) {
+                data.push({
+                    date: d3.timeParse('%Y-%m-%d %H:%M')(charts[i][0]),
+                    count: charts[i][1]
+                });
+            }
+            
+            return data;
+        };
+    </script>
+</body>
+</html>

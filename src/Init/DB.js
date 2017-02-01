@@ -10,8 +10,13 @@ $.InitDB = function(callback_inited_db) {
     var connection = mysql.createConnection($.cfg.mysql.connect);
     
 // Одни запрос
-    $.query = function(sql, callback) {
-        connection.query(sql, function(err, rows, fields) {
+    $.query = function(sql, args, callback) {
+        if (typeof args == 'function') {
+            callback = args;
+            args = [];
+        }
+        
+        connection.query(sql, args, function(err, rows, fields) {
             if (err) {
                 $.log('-------------');
                 $.log('SQL: ' + sql);
@@ -21,7 +26,7 @@ $.InitDB = function(callback_inited_db) {
                 return;
             }
             
-            if (callback) {
+            if (typeof callback == 'function') {
                 callback.call(
                     {err:err, row:rows[0], rows:rows, fields:fields, sql:sql},
                     rows[0], rows, sql

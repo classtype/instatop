@@ -76,24 +76,6 @@ var Day = {
 | -> Full
 |
 |-------------------------------------------------------------------------------------------------*/
-/* временно */
-var getTime = function(time, i) {
-    time = time || new Date();
-    var date = new Date(time);
-    var d = date.getDate();
-    var h = date.getHours();
-    var m = date.getMinutes();
-    var s = date.getSeconds();
-    var micro = date.getMilliseconds();
-    h = (h < 10 ? '0'+h : h);
-    m = (m < 10 ? '0'+m : m);
-    s = (s < 10 ? '0'+s : s);
-    micro = (micro < 1000 ? '0'+micro : micro);
-    micro = (micro < 100 ? '0'+micro : micro);
-    micro = (micro < 10 ? '0'+micro : micro);
-    
-    console.log((i ? i +'. ' : '') + d +' '+ h +':'+ m +':'+ s +':'+ micro);
-};
 
 var Full = {
 // Clear
@@ -229,37 +211,3 @@ $.Cron = function() {
 };
 
 //--------------------------------------------------------------------------------------------------
-
-/*
-var sql =
-    "SELECT * FROM `count_hour` " +
-    "WHERE `user_id` = '1' " +
-    "ORDER BY `time` ASC LIMIT 10";
-    
-$.query(sql, function(row, rows) {
-    getTime();
-    console.log('------------------------------------------------------------------------');
-    
-    for (var i = 0; i < rows.length; i++) {
-        getTime(rows[i].time * 1000, i + 1);
-    }
-    
-    console.log('------------------------------------------------------------------------');
-});
-
-var sql =
-    "SELECT * FROM `count_minute` " +
-    "WHERE `user_id` = '1' " +
-    "ORDER BY `time` ASC LIMIT 10";
-    
-$.query(sql, function(row, rows) {
-    getTime();
-    console.log('------------------------------------------------------------------------');
-    
-    for (var i = 0; i < rows.length; i++) {
-        getTime(rows[i].time * 1000, i + 1);
-    }
-    
-    console.log('------------------------------------------------------------------------');
-});
-*/

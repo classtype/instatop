@@ -12,6 +12,9 @@
         setInterval($.Cron, 60000);
     });
     
+// Загружаем шаблоны
+    $.Tpl.init();
+    
 // Создаем http сервер
     $.InitHttpServer();
     
