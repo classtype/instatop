@@ -14,7 +14,8 @@ $.InitHttpServer = function() {
         res.send(
             $.Tpl.render('UserInfo', {
                 user_id: 1,
-                user_name: 'yana_havana'
+                user_name: 'yana_havana',
+                host: req.get('host')
             })
         );
     });
@@ -46,7 +47,7 @@ $.InitHttpServer = function() {
         $.User.isID(req.params.user_id, function(user_id) {
             if (!user_id) {
                 return res.send(
-                    $.Tpl.error('ID "'+ req.params.user_id +'" не найден!')
+                    $.Tpl.error('ID "'+ req.params.user_id +'" не найден2!')
                 );
             }
             
@@ -150,6 +151,3 @@ $.InitHttpServer = function() {
 };
 
 //--------------------------------------------------------------------------------------------------
-/*
-Идея поменять местами 60/30/15 на 15/30/60
-*/

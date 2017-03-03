@@ -123,6 +123,7 @@ $.Request = {
                     var json = JSON.parse(body);
                     
                     if (json.user && json.user.followed_by) {
+                        console.log(json.user.followed_by.count);
                         $.Request.action(id, json.user.followed_by.count);
                     }
                 }
