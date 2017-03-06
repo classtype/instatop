@@ -30,6 +30,25 @@ $.Tpl = {
             status: 'error',
             error_msg: error_msg
         });
+    },
+    
+    getCharts: function(req, res, user_name) {
+        $.User.getID(user_name, function(user_id) {
+            if (!user_id) {
+                return res.send(
+                    $.Tpl.render('Error', {
+                        error_msg: 'Ник "'+ user_name +'" не найден!'
+                    })
+                );
+            }
+            
+            res.send(
+                $.Tpl.render('UserInfo', {
+                    user_id: user_id,
+                    user_name: user_name
+                })
+            );
+        });
     }
 };
 

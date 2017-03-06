@@ -11,35 +11,12 @@ $.InitHttpServer = function() {
     
 // "/"
     app.get('/', function(req, res) {
-        res.send(
-            $.Tpl.render('UserInfo', {
-                user_id: 1,
-                user_name: 'yana_havana',
-                host: req.get('host')
-            })
-        );
+        $.Tpl.getCharts(req, res, req.get('host') == 'svoyboi.com' ? 'svoyboi' : 'yana_havana');
     });
     
 // "/:user_name"
     app.get('/:user_name', function(req, res) {
-        var user_name = req.params.user_name;
-        
-        $.User.getID(user_name, function(user_id) {
-            if (!user_id) {
-                return res.send(
-                    $.Tpl.render('Error', {
-                        error_msg: 'Ник "'+ user_name +'" не найден!'
-                    })
-                );
-            }
-            
-            res.send(
-                $.Tpl.render('UserInfo', {
-                    user_id: user_id,
-                    user_name: user_name
-                })
-            );
-        });
+        $.Tpl.getCharts(req, res, req.params.user_name);
     });
     
 // /user/:user_id
@@ -47,7 +24,7 @@ $.InitHttpServer = function() {
         $.User.isID(req.params.user_id, function(user_id) {
             if (!user_id) {
                 return res.send(
-                    $.Tpl.error('ID "'+ req.params.user_id +'" не найден2!')
+                    $.Tpl.error('Аккаунт с ID "'+ req.params.user_id +'" не найден!')
                 );
             }
             

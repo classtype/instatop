@@ -58,7 +58,6 @@ $.InitDBSQL = function() {
         
     // Добавляем строки в таблицу "users"
         "INSERT IGNORE INTO `users` (`user_name`) VALUES ('yana_havana')",
-        "INSERT IGNORE INTO `users` (`user_name`) VALUES ('svoyboi')",
         "INSERT IGNORE INTO `users` (`user_name`) VALUES ('timatiofficial')",
         "INSERT IGNORE INTO `users` (`user_name`) VALUES ('kadyrov_95')",
         "INSERT IGNORE INTO `users` (`user_name`) VALUES ('artempolishchuk')",
@@ -69,6 +68,7 @@ $.InitDBSQL = function() {
         "INSERT IGNORE INTO `users` (`user_name`) VALUES ('tatianatkachuk')",
         "INSERT IGNORE INTO `users` (`user_name`) VALUES ('sashashapik')",
         "INSERT IGNORE INTO `users` (`user_name`) VALUES ('andrey.martynenko')",
+        "INSERT IGNORE INTO `users` (`user_name`) VALUES ('svoyboi')",
         
     // Добавляем строки в таблицу "users_full"
         "INSERT IGNORE INTO `users_full` (" +
