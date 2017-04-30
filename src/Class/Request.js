@@ -1,7 +1,7 @@
 //--------------------------------------------------------------------------------------------------
 
 var request = require('request');
-var _limit = 30;
+var _limit = 10;
 var _list = {};
 var _start = {};
 var _types = {};
@@ -123,18 +123,33 @@ $.Request = {
                     var json = JSON.parse(body);
                     
                     if (json.user && json.user.followed_by) {
-                        //console.log(json.user.followed_by.count);
-                        $.Request.action(id, json.user.followed_by.count);
+                        var count = json.user.followed_by.count;
+                        var last_media = '';
+                        
+                        if (json.user.media
+                        &&  json.user.media.nodes
+                        &&  json.user.media.nodes[0]
+                        &&  json.user.media.nodes[0].code) {
+                            last_media = json.user.media.nodes[0].code;
+                        }
+                        
+                        //console.log(count);
+                        //console.log(last_media);
+                        
+                        $.Request.action(id, {
+                           count: count,
+                           last_media: last_media
+                        });
                     }
                 }
             });
         }
     },
     
-    action: function(id, count) {
+    action: function(id, success) {
         if (id in _list) {
             for (var i = 0; i < _list[id].callbacks.length; i++) {
-                _list[id].callbacks[i](count, function() {
+                _list[id].callbacks[i](success, function() {
                     $.Request.remove(id);
                 });
             }

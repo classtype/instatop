@@ -11,6 +11,7 @@ h1 span {font-size:24px; font-weight:normal;}
 
 .blogger-name {padding:15px; background:#CF3476 linear-gradient(0deg, #9B1E55, #CF3476);}
 .blogger-name {color:#FFFFFF; font-size:36px; text-align:center;}
+.blogger-name a {color:#FFFFFF; font-weight:bold; text-decoration:none;}
 .blogger-name a {color:#FFFFFF; text-decoration:none;}
 
 .right-plus {position:absolute; right:0; margin-right:30px;}
@@ -24,6 +25,9 @@ h1 span {font-size:24px; font-weight:normal;}
 .green {color:#008800;}
 .red {color:#880000;}
 .gray {color:#999999;}
+
+.axis--x path {display:none;}
+.line {fill:none; stroke:steelblue; stroke-width:1.5px;}
 </style>
 </head>
 <body>
@@ -53,50 +57,79 @@ h1 span {font-size:24px; font-weight:normal;}
 </div>
 <script>
 var Chart = function(chartID, data) {
-    var svg = d3.select(chartID);
-    var margin = {top: 20, right: 20, bottom: 30, left: 50};
-    var width = +svg.attr('width') - margin.left - margin.right;
-    var height = +svg.attr('height') - margin.top - margin.bottom;
-    var g = svg.append('g').attr('transform', 'translate('+ margin.left +','+ margin.top +')');
-    
-    var x = d3.scaleTime().rangeRound([0, width]);
-    var y = d3.scaleLinear().rangeRound([height, 0]);
-    
+    var svg = d3.select(chartID),
+        margin = {top: 20, right: 80, bottom: 30, left: 50},
+        width = +svg.attr('width') - margin.left - margin.right,
+        height = +svg.attr('height') - margin.top - margin.bottom,
+        g = svg.append('g').attr('transform', 'translate('+ margin.left +','+ margin.top +')');
+        
+    var x = d3.scaleTime().range([0, width]),
+        y = d3.scaleLinear().range([height, 0]),
+        z = d3.scaleOrdinal(['#1F77B4', '#D62728']);
+        //z = d3.scaleOrdinal(d3.schemeCategory10);
+        // blue = '#1F77B4'
+        // yellow = '#FF7F0E'
+        // green = '#2CA02C'
+        // red = '#D62728'
+        
     var line = d3.line()
         //.curve(d3.curveBasis)/* если расскомментировать то сгибы линий будут более плавные */
         .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.count); });
+        .y(function(d) { return y(d.temperature); });
         
+    var cities = data.columns.slice(1).map(function(id) {
+        return {
+            id: id,
+            values: data.map(function(d) {
+                return {date: d.date, temperature: d[id]};
+            })
+        };
+    });
+    
     x.domain(d3.extent(data, function(d) { return d.date; }));
-    y.domain(d3.extent(data, function(d) { return d.count; }));
+    
+    y.domain([
+        d3.min(cities, function(c) { return d3.min(c.values, function(d) { return d.temperature; }); }),
+        d3.max(cities, function(c) { return d3.max(c.values, function(d) { return d.temperature; }); })
+    ]);
+    
+    z.domain(cities.map(function(c) { return c.id; }));
     
     g.append('g')
+        .attr('class', 'axis axis--x')
         .attr('transform', 'translate(0,'+ height +')')
-        .call(d3.axisBottom(x))
-        .select('.domain')
-        .remove();
+        .call(d3.axisBottom(x));
         
     g.append('g')
+        .attr('class', 'axis axis--y')
         .call(d3.axisLeft(y))
         .append('text')
-        .attr('fill', '#000')
         .attr('transform', 'rotate(-90)')
         .attr('y', 6)
         .attr('dy', '0.71em')
-        .attr('text-anchor', 'end')
+        .attr('fill', '#000')
         .text('Подписчики');
         
-    g.append('path')
-        .datum(data)
-        .attr('fill', 'none')
-        .attr('stroke', 'steelblue')
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1.5)
-        .attr('d', line);
+    var city = g.selectAll('.city')
+        .data(cities)
+        .enter().append('g')
+        .attr('class', 'city');
+        
+    city.append('path')
+        .attr('class', 'line')
+        .attr('d', function(d) { return line(d.values); })
+        .style('stroke', function(d) { return z(d.id); });
+        
+    city.append('text')
+        .datum(function(d) { return {id:d.id, value:d.values[d.values.length - 1]}; })
+        .attr('transform', function(d) { return 'translate('+ x(d.value.date) +','+ y(d.value.temperature) +')'; })
+        .attr('x', 3)
+        .attr('dy', '0.35em')
+        .style('font', '10px sans-serif')
+        .text(function(d) { return d.id; });
 };
 
-d3.json('/user/<%= user_id %>', function(err, json) {
+d3.json('/user_change/<%= user_id %>', function(err, json) {
     if (err) throw err;
     
     document.getElementById('blogger-name').innerHTML =
@@ -104,14 +137,14 @@ d3.json('/user/<%= user_id %>', function(err, json) {
     '@<%= user_name %></a> (подписчиков: '+ json.total +'<b></b>)';
     
     document.getElementById('right-plus').innerHTML =
-    '<a href="/change/<%= user_name %>"><b>1</b>/2</a>';
-
+    '<a href="/<%= user_name %>"><b>2</b>/2</a>';
+    
     var charts = json.charts;
     var chart_msg = {
-        day: '15/60 минут',// За день
-        week: '3/12 часов',// За неделю
-        month: '1/7 дней',// За месяц
-        month3: '30/90 дней'// За три месяца
+        day: '60 минут',// За день
+        week: '12 часов',// За неделю
+        month: '24 часа',// За месяц
+        month3: '7 дней'// За три месяца
     };
     
     for (var t in charts) {
@@ -149,9 +182,12 @@ var parse = function(charts) {
     for (var i = 0; i < charts.length; i++) {
         data.push({
             date: d3.timeParse('%Y-%m-%d %H:%M')(charts[i][0]),
-            count: charts[i][1]
+            'Пришло': charts[i][1],
+            'Ушло': charts[i][2]
         });
     }
+    
+    data.columns = ['date', 'Пришло', 'Ушло'];
     
     return data;
 };

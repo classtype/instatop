@@ -3,10 +3,12 @@
 var cfg = {};
 /* 40011.selvpc.ru */
 cfg.isDev = (process.env.C9_USER ? true : false);
-cfg.host = '95.213.230.199';
+//cfg.host = '95.213.230.1990';
+cfg.host = '77.244.220.202';
 cfg.port = 22;
 cfg.username = 'root';
-cfg.password = 'p4ue9yfx8k';
+//cfg.password = 'p4ue9yfx8k';
+cfg.password = '3055nemor5';
 
 cfg.path = '/var/projects/instatop';
 cfg.gitURL = 'https://github.com/classtype/instatop.git';

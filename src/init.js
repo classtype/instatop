@@ -9,7 +9,7 @@
         $.Cron();
         
     // Создаем крон
-        setInterval($.Cron, 60000);
+        setInterval($.Cron, 5000);
     });
     
 // Загружаем шаблоны
