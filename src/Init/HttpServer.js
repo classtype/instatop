@@ -9,7 +9,7 @@ $.InitHttpServer = function() {
     
 // "/"
     app.get('/', function(req, res) {
-        $.Tpl.getCharts(req, res, req.get('host') == 'svoyboi.com' ? 'svoyboi' : 'yana_havana');
+        $.Tpl.getCharts(req, res, req.get('host') == 'svoyboi.com' ? 'svoyboy' : 'yana_havana');
     });
     
 // "/:user_name"
