@@ -61,6 +61,7 @@ $.InitDBSQL = function() {
         
     // Добавляем строки в таблицу "users"
         "INSERT IGNORE INTO `users` (`user_name`) VALUES ('yana_havana')",
+        "INSERT IGNORE INTO `users` (`user_name`) VALUES ('svoyboy')",
         "INSERT IGNORE INTO `users` (`user_name`) VALUES ('svoyboi')",
         "INSERT IGNORE INTO `users` (`user_name`) VALUES ('osgard.jpg')"
         /*
