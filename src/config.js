@@ -4,7 +4,7 @@ var cfg = {};
 /* 40011.selvpc.ru */
 cfg.isDev = (process.env.C9_USER ? true : false);
 //cfg.host = '95.213.230.1990';
-cfg.host = '77.244.220.2020';
+cfg.host = '77.244.220.202';
 cfg.port = 22;
 cfg.username = 'root';
 //cfg.password = 'p4ue9yfx8k';
