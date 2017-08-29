@@ -10,6 +10,9 @@ server install
 // Перезагрузить сервер
 server restart
 
+// Версия ОС
+ubuntu 12.04
+
 
 
 
