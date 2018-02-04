@@ -27,6 +27,7 @@ console.log('TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! T
 console.log('TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! ');
 console.log('TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! ');
 console.log('TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! TEST! ');
+
 require('app.init')(
 // Базовые модули
     [
