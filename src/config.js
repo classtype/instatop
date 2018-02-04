@@ -24,7 +24,7 @@ cfg.ssh = {
 
 cfg.http = {
     IP: null,
-    PORT: 81
+    PORT: 80
 };
 
 cfg.mysql = {
