@@ -3,7 +3,7 @@
 $.InitDBSQL = function() {
     return [
     // Удаляем старую базу данных (временно)
-        "DROP DATABASE IF EXISTS `"+ $.cfg.mysql.database +"`",
+        //"DROP DATABASE IF EXISTS `"+ $.cfg.mysql.database +"`",
         
     // Создаем базу данных
         "CREATE DATABASE IF NOT EXISTS `"+ $.cfg.mysql.database +"` " +
